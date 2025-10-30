@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Happy 1 month sayang — Sayangnya kamu</title>
+  <style>
+    :root{
+      --pink:#ffdce6; /* pastel pink background */
+      --panel:#fff7fb;
+      --accent:#ff83b6;
+      --muted:#6b6b6b;
+    }
+    html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; background:var(--pink); color:#111}
+    .wrap{max-width:760px;margin:24px auto;padding:18px;box-sizing:border-box}
+    .card{background:var(--panel);border-radius:16px;box-shadow:0 6px 20px rgba(15,15,20,0.08);padding:18px}
+    h1{margin:0 0 8px;font-size:20px;color:#3b1660}
+    p.lead{margin:0 0 12px;color:var(--muted)}
+
+    /* password gate */
+    .gate{display:flex;gap:8px;margin-bottom:12px}
+    .gate input{flex:1;padding:10px;border-radius:10px;border:1px solid rgba(0,0,0,0.06)}
+    .gate button{background:var(--accent);color:white;border:0;padding:10px 14px;border-radius:10px}
+
+    /* quiz */
+    .quiz{margin-top:14px}
+    .q{margin:12px 0}
+    .q label{display:block;font-weight:600;margin-bottom:6px}
+    .q input[type=text]{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.06)}
+    .choices{display:flex;gap:8px}
+    .choices button{flex:1;padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);background:white}
+
+    /* scrapbook iframe */
+    .scrap-wrap{margin-top:18px;border-radius:12px;overflow:hidden}
+    .scrap-embed{width:100%;height:420px;border:0}
+
+    /* surat */
+    .surat{margin-top:18px}
+    .surat textarea{width:100%;min-height:140px;padding:12px;border-radius:10px;border:1px solid rgba(0,0,0,0.06)}
+    .btns{display:flex;gap:8px;margin-top:8px}
+    .small{font-size:13px;color:var(--muted)}
+
+    /* footer */
+    footer{margin-top:18px;text-align:center;color:var(--muted);font-size:13px}
+
+    @media (max-width:480px){.scrap-embed{height:600px}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <h1>Happy 1 month sayang</h1>
+      <p class="lead">Masukkan password untuk buka. (hint: kamu udah kasih)</p>
+
+      <div class="gate" id="gate">
+        <input id="pw" placeholder="Masukkan password..." />
+        <button id="openBtn">Buka</button>
+      </div>
+
+      <div id="lockedMsg" class="small">(Situs ini pribadi — jangan share link tanpa ijin)</div>
+
+      <div id="content" style="display:none">
+        <!-- Quiz -->
+        <div class="quiz card">
+          <strong>Quiz singkat biar aku yakin itu kamu 🥹</strong>
+
+          <div class="q">
+            <label>1) Berapa tanggal lahir kamu? (tanggal & bulan)</label>
+            <input id="q1" type="text" placeholder="contoh: 01 Oktober" />
+          </div>
+
+          <div class="q">
+            <label>2) Makanan kesukaan kamu apa sayang?</label>
+            <input id="q2" type="text" placeholder="nasi goreng, soto, dll" />
+          </div>
+
+          <div class="q">
+            <label>3) Kamu sayang aku gak?</label>
+            <div class="choices">
+              <button data-val="Sayang banget">Sayang banget</button>
+              <button data-val="Sayang pokoknya">Sayang pokoknya</button>
+            </div>
+            <input id="q3" type="hidden" />
+          </div>
+
+          <div class="q">
+            <label>4) Hal yang paling kamu suka dari aku apa?</label>
+            <input id="q4" type="text" />
+          </div>
+
+          <div class="q">
+            <label>5) Hal apa yang kamu pengen dari aku?</label>
+            <input id="q5" type="text" />
+          </div>
+
+          <div style="display:flex;gap:8px;margin-top:10px">
+            <button id="submitQuiz" style="background:var(--accent);color:white;padding:10px;border-radius:10px;border:0">Kirim Jawaban</button>
+            <button id="saveJSON" style="padding:10px;border-radius:10px;border:1px solid rgba(0,0,0,0.06)">Save ke device</button>
+          </div>
+          <div id="quizMsg" class="small" style="margin-top:8px"></div>
+        </div>
+
+        <!-- Scrapbook embed -->
+        <div class="scrap-wrap card">
+          <strong>Our Scrapbook</strong>
+          <!-- use embed code yang udah kamu buat; saya taruh contoh iframe -->
+          <div style="margin-top:12px">
+            <!-- Ganti src jika perlu; ini contoh embed Canva -->
+            <iframe class="scrap-embed" src="https://www.canva.com/design/DAG3LUXqS_E/v3FuA_kGT48ngWoaZoN26A/watch?embed" loading="lazy"></iframe>
+          </div>
+        </div>
+
+        <!-- Surat-ku -->
+        <div class="surat card">
+          <strong>Surat-ku (kamu bisa pilih atau tulis baru)</strong>
+          <select id="preset" style="margin-top:8px;padding:8px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);width:100%">
+            <option value="">Pilih surat lucu / manis...</option>
+            <option value="1">Surat 1 — 'Aku Telpon Kamu Nanti' (lucu)</option>
+            <option value="2">Surat 2 — 'Maaf Aku Makan Semua Cemilanmu' (gemas)</option>
+            <option value="3">Surat 3 — 'Aku Kangen, Tolong Balas' (manis)</option>
+          </select>
+          <textarea id="surat" placeholder="Tulis suratmu di sini...">Hai sayang, aku bikin ini buat kamu. Kamu selalu jadi bagian yang bikin aku senyum. — (tambahin yang lucu ya)</textarea>
+          <div class="btns">
+            <button id="saveSurat" style="background:var(--accent);color:white;padding:10px;border-radius:10px;border:0">Simpan Surat</button>
+            <button id="downloadSurat" style="padding:10px;border-radius:10px;border:1px solid rgba(0,0,0,0.06)">Download</button>
+          </div>
+        </div>
+
+        <footer class="card small">Made with ❤️ — private page. Tekan tombol "Save ke device" di quiz untuk simpan jawaban.</footer>
+      </div>
+    </div>
+  </div>
+
+  <!-- audio: play once user scrolls (replace src with actual mp3 URL or file path) -->
+  <audio id="bgm" preload="auto" src="audio/alamak.mp3"></audio>
+
+  <script>
+    const PASSWORD = '011025';
+    const pwInput = document.getElementById('pw');
+    const openBtn = document.getElementById('openBtn');
+    const content = document.getElementById('content');
+    const gate = document.getElementById('gate');
+    const bgm = document.getElementById('bgm');
+
+    openBtn.addEventListener('click',()=>{
+      if(pwInput.value.trim()===PASSWORD){
+        gate.style.display='none';
+        content.style.display='block';
+        localStorage.setItem('scrap_unlocked','1');
+      } else {
+        alert('Password salah sayang 💔');
+      }
+    });
+
+    // auto-open if previously unlocked
+    if(localStorage.getItem('scrap_unlocked')){
+      gate.style.display='none'; content.style.display='block';
+    }
+
+    // Play bgm on first user scroll (autoplay often blocked until user gesture)
+    let played=false;
+    function playOnScroll(){
+      if(played) return;
+      if(bgm.src){
+        bgm.play().catch(()=>{});
+        played=true;
+      }
+    }
+    window.addEventListener('scroll', playOnScroll, {once:true});
+    window.addEventListener('touchstart', playOnScroll, {once:true});
+
+    // Quiz handlers
+    document.querySelectorAll('.choices button').forEach(b=>{
+      b.addEventListener('click',()=>{
+        document.getElementById('q3').value=b.dataset.val;
+        document.querySelectorAll('.choices button').forEach(x=>x.style.background='');
+        b.style.background='var(--accent)'; b.style.color='white';
+      });
+    });
+
+    document.getElementById('submitQuiz').addEventListener('click',()=>{
+      const data = {
+        q1:document.getElementById('q1').value.trim(),
+        q2:document.getElementById('q2').value.trim(),
+        q3:document.getElementById('q3').value.trim(),
+        q4:document.getElementById('q4').value.trim(),
+        q5:document.getElementById('q5').value.trim(),
+        at:new Date().toISOString()
+      };
+      localStorage.setItem('scrap_quiz', JSON.stringify(data));
+      document.getElementById('quizMsg').textContent='Jawaban tersimpan! Kamu sekarang bisa lihat scrapbook ❤️';
+    });
+
+    // Save quiz as JSON / CSV
+    document.getElementById('saveJSON').addEventListener('click',()=>{
+      const s = localStorage.getItem('scrap_quiz');
+      if(!s){alert('Belum ada jawaban, kirim dulu ya.');return}
+      const obj = JSON.parse(s);
+      const csv = 'key,value
+' + Object.keys(obj).map(k=>k+','+('"'+(obj[k]||'')+'"')).join('
+');
+      const blob = new Blob([csv],{type:'text/csv'});
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'scrap_quiz.csv';
+      a.click();
+    });
+
+    // surat presets
+    const presets = {
+      '1': 'Hai sayang, aku nggak jadi gangguin kamu malam ini. Tapi inget ya, aku bakal telpon kalo aku kangen. – Lucu kan? 😝',
+      '2': 'Maaf ya, aku makan cemilanmu. Tapi tenang, nanti kubeli lagi. Love you! 💖',
+      '3': 'Aku kangen banget, tolong balas walau cuma emoji. 😭😘'
+    };
+    document.getElementById('preset').addEventListener('change',e=>{
+      const val=e.target.value; if(val && presets[val]) document.getElementById('surat').value=presets[val];
+    });
+
+    document.getElementById('saveSurat').addEventListener('click',()=>{
+      localStorage.setItem('surat_text', document.getElementById('surat').value);
+      alert('Surat tersimpan!');
+    });
+    document.getElementById('downloadSurat').addEventListener('click',()=>{
+      const text = document.getElementById('surat').value;
+      const blob = new Blob([text],{type:'text/plain'});
+      const a = document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='surat-ku.txt'; a.click();
+    });
+
+    // load saved surat if any
+    const saved = localStorage.getItem('surat_text'); if(saved) document.getElementById('surat').value=saved;
+  </script>
+</body>
+</html>
