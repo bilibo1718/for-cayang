@@ -43,7 +43,7 @@
   <div class="wrap">
     <div class="card">
       <h1>Happy 1 month sayang</h1>
-      <p class="lead">Masukkan password untuk buka. (hint: kamu udah kasih)</p>
+      <p class="lead">Masukkan password untuk buka. (hint: tanggal)</p>
       <div class="gate" id="gate">
         <input id="pw" placeholder="Masukkan password..." />
         <button id="openBtn">Buka</button>
@@ -51,7 +51,7 @@
       <div id="lockedMsg" class="small">(Situs ini pribadi — jangan share link tanpa ijin)</div>
       <div id="content" style="display:none">
         <div class="quiz card" id="quizSection">
-          <strong>Quiz singkat biar aku yakin itu kamu 🥹</strong>
+          <strong>Quiz singkat biar aku makin tau kamu 🥹</strong>
           <div class="q">
             <label>1) Berapa tanggal lahir kamu? (tanggal & bulan)</label>
             <input id="q1" type="text" placeholder="contoh: 01 Oktober" />
@@ -90,17 +90,19 @@
               <img class="scrap-img" data-src="images/scrap_long.png" alt="scrap panjang" loading="lazy" />
             </div>
           </div>
-          <div class="small" style="margin-top:8px">(Scrapbook hanya muncul setelah semua quiz dijawab — scroll untuk lihat gambar)</div>
+          <div class="small" style="margin-top:8px">(Suprise hanya muncul setelah semua quiz dijawab — jadi isi yang bener ya sayang)</div>
         </div>
         <div class="surat card hidden" id="suratSection">
-          <strong>Surat-ku (kamu bisa pilih atau tulis baru)</strong>
+          <strong>Surat cinta (Dibuat dengan kasih sayang)</strong>
           <select id="preset" style="margin-top:8px;padding:8px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);width:100%">
-            <option value="">Pilih surat lucu / manis...</option>
-            <option value="1">Surat 1 — 'Aku Telpon Kamu Nanti' (lucu)</option>
-            <option value="2">Surat 2 — 'Maaf Aku Makan Semua Cemilanmu' (gemas)</option>
-            <option value="3">Surat 3 — 'Aku Kangen, Tolong Balas' (manis)</option>
+            <option value="">Pilih surat...</option>
+            <option value="1">Surat 1 — 'Surat "Awal Kita"' (nostalgia)</option>
+            <option value="2">Surat 2 — 'Surat "Hari ini"' (❤️)</option>
+            <option value="3">Surat 3 — 'Surat "Nanti Kita"' (masa depan)</option>
           </select>
-          <textarea id="surat" placeholder="Tulis suratmu di sini...">Hai sayang, aku bikin ini buat kamu. Kamu selalu jadi bagian yang bikin aku senyum. — (tambahin yang lucu ya)</textarea>
+          <textarea id="surat" placeholder="Tulis suratmu di sini...">Hai sayang, aku bikin ini buat kamu. Aku mau jujur nih… sebenarnya aku udah mulai ngerjain ini dari minggu kemarin.
+Makanya kalau akhir-akhir ini aku agak sibuk, itu karena aku pengen nyelesain ini buat kamu.
+Aku pengen pas kamu liat nanti, kamu tau seberapa aku sayang dan mikirin kamu 🥺💞.</textarea>
           <div class="btns">
             <button id="saveSurat" style="background:var(--accent);color:white;padding:10px;border-radius:10px;border:0">Simpan Surat</button>
             <button id="downloadSurat" style="padding:10px;border-radius:10px;border:1px solid rgba(0,0,0,0.06)">Download</button>
@@ -226,10 +228,45 @@
       location.reload();
     });
     const presets = {
-      '1': 'Hai sayang, aku nggak jadi gangguin kamu malam ini. Tapi inget ya, aku bakal telpon kalo aku kangen. – Lucu kan? 😝',
-      '2': 'Maaf ya, aku makan cemilanmu. Tapi tenang, nanti kubeli lagi. Love you! 💖',
-      '3': 'Aku kangen banget, tolong balas walau cuma emoji. 😭😘'
-    };
+  '1': `Halo Ezii,
+
+Aku masih inget banget awal kita mulai deket, semuanya berawal dari hal kecil dan iseng, tapi entah kenapa aku ngerasa nyaman banget. Dari cara kamu ngomong, cara kamu bercanda, sampai hal-hal random yang cuma kamu yang ngerti 😆
+
+Kadang aku mikir, “Kok bisa ya, aku secepat ini ngerasa deket sama kamu?”
+Tapi tiap kali kamu ada, aku ngerasa tenang, kayak ada rumah di tengah hiruk pikuk hari-hariku 🫶
+
+Mungkin buat orang lain, satu bulan itu waktu yang sebentar.
+Tapi buat aku, satu bulan sama kamu rasanya penuh tawa, obrolan kecil, dan rasa yang makin tumbuh setiap hari 🥰
+
+Aku gak tau nanti bakal kayak gimana, tapi yang aku tau sekarang,
+aku bersyukur banget bisa kenal dan punya kamu di hidupku 🤍`,
+
+  '2': `Sayang,
+
+Sekarang kita udah jalan satu bulan bareng, ya 🫶
+Kadang aku masih suka mikir kok bisa ya, kita sejauh ini? Padahal awalnya cuma iseng, cuma main bareng, cuma ngobrol kecil yang ternyata jadi hal besar buat aku.
+
+Aku tau, gak semua hari kita berjalan sempurna.
+Ada kalanya kamu sibuk, aku capek, atau kita sama-sama gak ngerti satu sama lain.
+Tapi justru itu yang bikin aku yakin, karena meski sesederhana apa pun hari kita, kamu tetap di situ, dan aku juga masih di sini buat kamu.
+
+Aku bersyukur banget bisa kenal kamu, bisa denger kamu cerita, bisa jadi orang yang kamu percaya.
+Aku sayang sama kamu, bukan cuma karena kamu perhatian atau lucu, tapi karena kamu selalu berusaha jadi versi terbaik dari diri kamu, bahkan pas kamu ngerasa gagal sekalipun 🤍`,
+
+  '3': `Sayang,
+
+Kadang aku suka mikir, kalau satu bulan aja bisa sespesial ini, gimana nanti bulan-bulan berikutnya ya? 🥹
+Aku pengen masih bisa nulis hal-hal kecil kayak gini buat kamu, entah satu bulan lagi, tiga bulan, atau bahkan setahun dari sekarang.
+
+Aku tau hubungan gak selalu gampang, bakal ada hari di mana kita capek, sibuk, atau ngerasa jauh.
+Tapi aku pengen kamu inget satu hal: aku gak akan kemana-mana.
+Aku mau terus belajar ngerti kamu, tumbuh bareng kamu, dan terus percaya kalau kita tuh berdua di sini.
+
+Aku gak butuh hubungan yang selalu sempurna, aku cuma pengen hubungan yang nyata, yang saling maaf, saling percaya, dan saling sayang walaupun kadang susah.
+
+Kalau nanti ada masa kita ngerasa goyah, aku pengen kamu baca surat ini lagi…
+biar kamu inget, kalau dari awal aku milih kamu bukan cuma buat sekarang, tapi buat terus bareng kamu ke depan 💞`
+};
     document.getElementById('preset').addEventListener('change',e=>{
       const val=e.target.value; if(val && presets[val]) document.getElementById('surat').value=presets[val];
     });
